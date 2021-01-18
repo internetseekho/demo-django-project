@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update Manager</title>
+	{% load static %}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<!-- <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}"/> -->
+</head>
+<body>
+<form method="POST" class="post-form" action="/managers/update/{{manager.id}}">
+		{% csrf_token %}
+
+	<div class="container">
+		<br>
+		<div class="form-group row">
+		<label class="col-sm-1 col-form-lable"></label>	
+			<div class="col-sm-4">
+				<h3>Update Details</h3>
+			</div>
+		</div>
+	
+
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-lable">Manager ID : </label>
+			<div class="col-sm-4">
+				<input type="text" name="mid" id="id_mid" value="{{ manager.mid }}"/>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-lable">Manager Name : </label>
+			<div class="col-sm-4">
+				<input type="text" name="mname" id="id_mname" value="{{ manager.mname }}"/>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-lable">Manager Email : </label>
+			<div class="col-sm-4">
+				<input type="text" name="memail" id="id_memail" value="{{ manager.memail }}"/>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-lable">Manager Contact : </label>
+			<div class="col-sm-4">
+				<input type="text" name="mcontact" id="id_mcontact" value="{{ manager.mcontact }}"/>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-success">Update</button>
+	</div>
+
+</form>
+</body>
+</html>
