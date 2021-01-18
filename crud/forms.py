@@ -23,5 +23,5 @@ class ClientForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
 	class Meta:
-		model = Clients
+		model = Projects
 		fields = "__all__"

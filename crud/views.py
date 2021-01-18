@@ -1,6 +1,30 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 from crud.forms import EmployeeForm, DeveloperForm, ManagerForm, ClientForm, ProjectForm
 from crud.models import Employee, Developers, Managers, Clients, Projects
+
+def login(request):
+	if request.method == 'POST':
+		username = request.POST.get("username")
+		password = request.POST.get("password")
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, username)
+			redirect("/developers/show")
+	context = {}
+	return render(request,"login.html")
+
+def registration(request):
+	form = UserCreationForm()
+
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+
+	context = { "form" : form }
+	return render(request,"registration.html", context)
 
 def emp(request):
 	if request.method == "POST":
@@ -114,7 +138,6 @@ def cli_show(request):
 def client(request):
 	if request.method == "POST":
 		form = ClientForm (request.POST)
-		print(form); 
 		if form.is_valid():
 			try:
 				form.save()
@@ -143,13 +166,12 @@ def cli_delete(request, id):
 	return redirect("/clients/show")
 
 def pro_show(request):
-	projects = Projects.objects.all() 
+	projects = Projects.objects.all()
 	return render(request, "projects/show.html",{'projects': projects})
 
 def project(request):
 	if request.method == "POST":
 		form = ProjectForm (request.POST)
-		print(form); 
 		if form.is_valid():
 			try:
 				form.save()
@@ -157,12 +179,18 @@ def project(request):
 			except:
 				pass
 	else:
-		form = ProjectForm()
-	return render(request,"projects/index.html",{'form':form})
+		form       = ProjectForm()
+	clients    = Clients.objects.all() 
+	developers = Developers.objects.all()
+	managers   = Managers.objects.all() 
+	return render(request,"projects/index.html",{'clients':clients, 'form':form, 'developers': developers, "managers": managers})
 
 def pro_edit(request,id):
-	project = Projects.objects.get(id=id)
-	return render(request,"projects/edit.html",{'project':project})
+	project    = Projects.objects.get(id=id)
+	clients    = Clients.objects.all() 
+	developers = Developers.objects.all()
+	managers   = Managers.objects.all() 
+	return render(request,"projects/edit.html",{'project':project, 'clients':clients, 'developers': developers, "managers": managers})
 
 def pro_update(request,id):
 	project = Projects.objects.get(id=id)

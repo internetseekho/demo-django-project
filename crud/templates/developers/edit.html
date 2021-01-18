@@ -1,55 +1,106 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-	<title>Update Developer</title>
-	{% load static %}
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-	<!-- <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}"/> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title>Projects Edit</title>
+
+	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<!-- Custom styles for this template -->
+	<link href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css"
+		rel="stylesheet">
 </head>
+
 <body>
-<form method="POST" class="post-form" action="/developers/update/{{developer.id}}">
-		{% csrf_token %}
 
-	<div class="container">
-		<br>
-		<div class="form-group row">
-		<label class="col-sm-1 col-form-lable"></label>	
-			<div class="col-sm-4">
-				<h3>Update Details</h3>
+	<header>
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<a class="navbar-brand" href="#">Demo Project Python Django</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+				aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarCollapse">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/projects/show">Projects <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/developers/show">Developers</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/managers/show">Managers</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/clients/show">Clients</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link disabled" href="#">Disabled</a>
+					</li>
+				</ul>
 			</div>
-		</div>
-	
+		</nav>
+	</header>
 
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-lable">Developer ID : </label>
-			<div class="col-sm-4">
-				<input type="text" name="did" id="id_did" value="{{ developer.did }}"/>
+	<!-- Begin page content -->
+	<main role="main" class="container">
+		<form method="POST" class="post-form" action="/developers/update/{{developer.id}}">
+			{% csrf_token %}
+
+			<div class="container">
+				<br>
+				<div class="form-group row">
+					<label class="col-sm-1 col-form-lable"></label>
+					<div class="col-sm-4">
+						<h3>Update Details</h3>
+					</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-lable">Developer ID : </label>
+					<div class="col-sm-4">
+						<input type="text" name="did" id="id_did" value="{{ developer.did }}" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-lable">Developer Name : </label>
+					<div class="col-sm-4">
+						<input type="text" name="dname" id="id_dname" value="{{ developer.dname }}" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-lable">Developer Email : </label>
+					<div class="col-sm-4">
+						<input type="text" name="demail" id="id_demail" value="{{ developer.demail }}" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-lable">Developer Contact : </label>
+					<div class="col-sm-4">
+						<input type="text" name="dcontact" id="id_dcontact" value="{{ developer.dcontact }}" />
+					</div>
+				</div>
+				<button type="submit" class="btn btn-success">Update</button>
 			</div>
-		</div>
 
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-lable">Developer Name : </label>
-			<div class="col-sm-4">
-				<input type="text" name="dname" id="id_dname" value="{{ developer.dname }}"/>
-			</div>
-		</div>
-
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-lable">Developer Email : </label>
-			<div class="col-sm-4">
-				<input type="text" name="demail" id="id_demail" value="{{ developer.demail }}"/>
-			</div>
-		</div>
-
-		<div class="form-group row">
-			<label class="col-sm-2 col-form-lable">Developer Contact : </label>
-			<div class="col-sm-4">
-				<input type="text" name="dcontact" id="id_dcontact" value="{{ developer.dcontact }}"/>
-			</div>
-		</div>
-		<button type="submit" class="btn btn-success">Update</button>
-	</div>
-
-</form>
+		</form>
+	</main>
 </body>
+
 </html>

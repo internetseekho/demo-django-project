@@ -49,10 +49,10 @@ class Clients(models.Model):
 		return self.cname
 
 class Projects(models.Model):
-	pid = models.CharField(max_length=10)
-	pname = models.CharField(max_length=250)
-	pemail = models.EmailField(max_length=100)
-	pcontact = models.CharField(max_length=30)
+	pname     = models.CharField(max_length=250)
+	client    = models.ForeignKey(Clients, on_delete=models.CASCADE)
+	manager   = models.ForeignKey(Managers, on_delete=models.CASCADE)
+	developer = models.ForeignKey(Developers, on_delete=models.CASCADE)
 
 	class Meta:
 		db_table = "projects"
