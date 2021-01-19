@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from crud.models import Employee, Developers, Managers, Clients, Projects
 
 class EmployeeForm(forms.ModelForm):
@@ -25,3 +27,8 @@ class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Projects
 		fields = "__all__"
+
+class CreateUserForm(UserCreationForm):
+	class Meta:
+		model  = User
+		fields = ["username", "email", "password1", "password2"]

@@ -8,7 +8,7 @@
 	<meta name="author" content="">
 	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-	<title>Projects Edit</title>
+	<title>Edit Developer</title>
 
 	<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/">
 
@@ -33,11 +33,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="/projects/show">Projects <span class="sr-only">(current)</span></a>
-					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/developers/show">Developers</a>
+						<a class="nav-link" href="/projects/show">Projects</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/developers/show">Developers <span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/managers/show">Managers</a>
@@ -45,62 +45,66 @@
 					<li class="nav-item">
 						<a class="nav-link" href="/clients/show">Clients</a>
 					</li>
-
-					<li class="nav-item">
-						<a class="nav-link disabled" href="#">Disabled</a>
+					<li class="nav-right">
+						<a class="nav-link" href="/logout">Logout</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 	</header>
-
-	<!-- Begin page content -->
-	<main role="main" class="container">
-		<form method="POST" class="post-form" action="/developers/update/{{developer.id}}">
-			{% csrf_token %}
-
-			<div class="container">
-				<br>
-				<div class="form-group row">
-					<label class="col-sm-1 col-form-lable"></label>
-					<div class="col-sm-4">
-						<h3>Update Details</h3>
-					</div>
+	<div class="container">
+		<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">Edit Developer</div>
 				</div>
 
+				<div style="padding-top:30px" class="panel-body">
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-lable">Developer ID : </label>
-					<div class="col-sm-4">
-						<input type="text" name="did" id="id_did" value="{{ developer.did }}" />
-					</div>
-				</div>
+					<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-lable">Developer Name : </label>
-					<div class="col-sm-4">
-						<input type="text" name="dname" id="id_dname" value="{{ developer.dname }}" />
-					</div>
-				</div>
+					<form id="loginform" method="POST" action="/developers/update/{{developer.id}}" class="form-horizontal" role="form">
+						{% csrf_token %}
+						<div style="margin-bottom: 25px" class="input-group">
+							<input id="id_did" type="text" class="form-control" name="did" value="{{developer.did}}"
+								placeholder="Developer id like 1,2,3,4,5">
+						</div>
+						<div style="margin-bottom: 25px" class="input-group">
+							<input id="id_dname" type="text" class="form-control" name="dname" value="{{developer.dname}}"
+								placeholder="Developer Name like John etc">
+						</div>
+						<div style="margin-bottom: 25px" class="input-group">
+							<input id="id_demail" type="email" class="form-control" name="demail" value="{{developer.demail}}"
+								placeholder="Developer email@domain.com like">
+						</div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-lable">Developer Email : </label>
-					<div class="col-sm-4">
-						<input type="text" name="demail" id="id_demail" value="{{ developer.demail }}" />
-					</div>
-				</div>
+						<div style="margin-bottom: 25px" class="input-group">
+							<input id="id_dcontact" type="text" class="form-control" name="dcontact" value="{{developer.dcontact}}"
+								placeholder="Developer contact like 030178451455">
+						</div>
 
-				<div class="form-group row">
-					<label class="col-sm-2 col-form-lable">Developer Contact : </label>
-					<div class="col-sm-4">
-						<input type="text" name="dcontact" id="id_dcontact" value="{{ developer.dcontact }}" />
-					</div>
+						<div style="margin-top:10px" class="form-group">
+							<!-- Button -->
+							<div class="col-sm-12 controls">
+								<button id="btn-login" type="submit" href="#" class="btn btn-primary">Update Developer</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-12 control">
+								<div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+									Don't want to update developer click to go back
+									<a href="/developers/show">
+										Back
+									</a>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
-				<button type="submit" class="btn btn-success">Update</button>
 			</div>
+		</div>
+	</div>
 
-		</form>
-	</main>
 </body>
 
 </html>
