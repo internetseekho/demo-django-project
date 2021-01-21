@@ -45,7 +45,7 @@ urlpatterns = [
     path('projects/edit/<int:id>', views.pro_edit),
     path('projects/delete/<int:id>', views.pro_delete),
 
-    path('', views.login),
+    path('', views.login_page),
     path('login', views.login_page),
     path('logout', views.logout_page),
     path('registration', views.registration),
