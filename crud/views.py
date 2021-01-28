@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from crud.models import Openaq, Airnow
 import requests
+from django.http import JsonResponse
 
 def openaq(request):
 	return render(request,"openaq/index.html",{'openaq':openaq})
@@ -41,13 +42,13 @@ def openaq_add(request):
 
 
 def airnow(request):
-	return render(request,"openaq/index.html",{'openaq':openaq})
+	return render(request,"airnow/index.html",{'openaq':openaq})
 
 def markers_airnow(request):
 	airnow = Airnow.objects.all()
 	dic    = {}
 	for airno in airnow:
-		dic[opena.id] = {
+		dic[airno.id] = {
 			"lat" : airno.Latitude, 
 			"lng" : airno.Longitude, 
 			"DateIssue" : airno.DateIssue, 

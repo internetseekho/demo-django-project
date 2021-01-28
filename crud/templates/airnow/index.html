@@ -27,58 +27,32 @@
 
     $.get(/markers_airnow/, [], function (response) {
             $.each(response, function (key, value) {
-                var temp = $.parseJSON(value.countsByMeasurement);
                 var marker = new mapboxgl.Marker()
-                .setLngLat([value.lng,value.lat])
-                .setPopup(
-                    new mapboxgl.Popup({
-                        offset: 25
-                    })
-                    .setHTML(
-                        '<br><b> Parameter: ' +temp[0].parameter+' \
-                        <br> \
-                            Count: ' +temp[0].count+' \
-                        <br> \
-                        <br> </b>'
-                    )
-                )
-                .addTo(map);
-            });
-        }, "json");
-
-    $.ajax({
-        url: "markers.php",
-        cache: false,
-        dataType: 'json',
-        success: function (response) {
-            
-            response.forEach(function (marker) {
-
-                var marker = new mapboxgl.Marker()
-                    .setLngLat([marker.lng,marker.lat])
+                    .setLngLat([value.lng,value.lat])
                     .setPopup(
                         new mapboxgl.Popup({
-                            offset: 25
+                            offset: 10
                         }) // add popups
                         .setHTML(
-                            '<b> Date Issue: ' +marker.DateIssue+' \
+                            '<b> Date Issue: ' +value.DateIssue+' \
                             <br> \
-                            Date Forecast: ' +marker.DateForecast+' \
+                            Date Forecast: ' +value.DateForecast+' \
                             <br> \
-                            Reporting Area: ' +marker.ReportingArea+' \
+                            Reporting Area: ' +value.ReportingArea+' \
                             <br> \
-                            State Code: ' +marker.StateCode+' \
+                            State Code: ' +value.StateCode+' \
                             <br> \
-                            Parameter Name: ' +marker.ParameterName+' \
+                            Parameter Name: ' +value.ParameterName+' \
                             <br> \
-                            AQI: ' +marker.AQI+' \
+                            AQI: ' +value.AQI+' \
                             <br> </b>'
                         )
                     )
                     .addTo(map);
                 });
-        }
-    });
+        }, "json");
+
+
 
 </script>
 

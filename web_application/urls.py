@@ -26,6 +26,6 @@ urlpatterns = [
     path('openaq/add', views.openaq_add),
 
     path('airnow', views.airnow),
-    path('markers_airnow', views.markers_airnow),
+    path('markers_airnow/', views.markers_airnow),
 
 ]
