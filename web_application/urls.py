@@ -21,37 +21,11 @@ urlpatterns = [
     
     path('admin/', admin.site.urls),
 
-    path('developers/show',views.dev_show),
-    path('developers/add',views.dev),
-    path('developers/update/<int:id>',views.dev_update),
-    path('developers/edit/<int:id>', views.dev_edit),
-    path('developers/delete/<int:id>', views.dev_delete),
-
-    path('managers/show',views.man_show),
-    path('managers/add',views.man),
-    path('managers/update/<int:id>',views.man_update),
-    path('managers/edit/<int:id>', views.man_edit),
-    path('managers/delete/<int:id>', views.man_delete),
-    
-    path('clients/show',views.cli_show),
-    path('clients/add',views.client),
-    path('clients/update/<int:id>',views.cli_update),
-    path('clients/edit/<int:id>', views.cli_edit),
-    path('clients/delete/<int:id>', views.cli_delete),
-    
-    path('projects/show',views.pro_show),
-    path('projects/add',views.project),
-    path('projects/update/<int:id>',views.pro_update),
-    path('projects/edit/<int:id>', views.pro_edit),
-    path('projects/delete/<int:id>', views.pro_delete),
-
-    path('', views.login_page),
-    path('login', views.login_page),
-    path('logout', views.logout_page),
-    path('registration', views.registration),
-
     path('openaq', views.openaq),
     path('markers/', views.markers),
     path('openaq/add', views.openaq_add),
+
+    path('airnow', views.airnow),
+    path('markers_airnow', views.markers_airnow),
 
 ]
