@@ -3,8 +3,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from crud.forms import EmployeeForm, DeveloperForm, ManagerForm, ClientForm, ProjectForm, CreateUserForm
-from crud.models import Employee, Developers, Managers, Clients, Projects
+from crud.models import Employee, Developers, Managers, Clients, Projects, Openaq
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+import json
+import requests
 
 def login_page(request):
 	if request.user.is_authenticated:
@@ -218,3 +221,40 @@ def pro_delete(request, id):
 	project.delete()
 	messages.success(request, "Project Deleted successfully")
 	return redirect("/projects/show")
+
+def openaq(request):
+	return render(request,"openaq/index.html",{'openaq':openaq})
+
+def markers(request):
+	openaq = Openaq.objects.all()
+	dic    = {}
+	for opena in openaq:
+		dic[opena.id] = {"lat" : opena.latitude, "lng" : opena.longitude, "countsByMeasurement" : opena.countsByMeasurement }
+	return JsonResponse(dic, status=200)
+
+def openaq_add(request):
+	url            = "https://api.openaq.org/v1/locations?limit=5&page=1"
+	response       = requests.get(url)
+	if response.status_code == 200:
+		parseddata = response.json()
+		for parsed in parseddata["results"]:
+			openaq                     = Openaq()
+			openaq.p_id                = parsed['id']
+			openaq.country             = parsed['country']
+			openaq.city                = parsed['city']
+			openaq.cities              = parsed['cities']
+			openaq.location            = parsed['location']
+			openaq.locations           = parsed['locations']
+			openaq.sourceName          = parsed['sourceName']
+			openaq.sourceNames         = parsed['sourceNames']
+			openaq.sourceType          = parsed['sourceType']
+			openaq.sourceTypes         = parsed['sourceTypes']
+			openaq.longitude           = parsed['coordinates']['longitude']
+			openaq.latitude            = parsed['coordinates']['latitude']
+			openaq.firstUpdated        = parsed['firstUpdated']
+			openaq.lastUpdated         = parsed['lastUpdated']
+			openaq.parameters          = parsed['parameters']
+			openaq.countsByMeasurement = parsed['countsByMeasurement']
+			openaq.count               = parsed['count']
+			openaq.save()
+	return render(request, "openaq/add.html", { "response_code" : response.status_code })

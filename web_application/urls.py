@@ -50,4 +50,8 @@ urlpatterns = [
     path('logout', views.logout_page),
     path('registration', views.registration),
 
+    path('openaq', views.openaq),
+    path('markers/', views.markers),
+    path('openaq/add', views.openaq_add),
+
 ]
