@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from crud.models import Openaq, Airnow
 import requests
 from django.http import JsonResponse
+from crud.models import Table_1, Table_2
+
+# Create your views here.
+def hello_world(request):
+    table_1 = Table_1.objects.all()
+    return render(request,"hello_world.html", {"table_1" : table_1})
 
 def openaq(request):
 	return render(request,"openaq/index.html",{'openaq':openaq})

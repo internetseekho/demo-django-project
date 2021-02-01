@@ -28,4 +28,6 @@ urlpatterns = [
     path('airnow', views.airnow),
     path('markers_airnow/', views.markers_airnow),
 
+    path('', views.hello_world),
+
 ]
